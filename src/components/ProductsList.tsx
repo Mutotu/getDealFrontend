@@ -26,7 +26,6 @@ const ProductsList: React.FC<ProductsListProps> = ({
   const handleAdd = (id: number) => {
     setActiveCard((prevActiveCard) => (prevActiveCard + 1) % products.length);
     onHandleAdd(id);
-    console.log(id);
   };
 
   return (

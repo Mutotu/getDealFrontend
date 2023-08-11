@@ -2,7 +2,7 @@ import { selectData } from "../store/user/userSlice";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { updateCart } from "../store/user/userSlice";
+import { updateCart, clearTepmCardIds } from "../store/user/userSlice";
 import { useEffect, useState } from "react";
 
 interface Product {
@@ -40,8 +40,9 @@ const Basket = () => {
       .then((r) => {
         console.log(r);
         dispatch(updateCart(r));
+        dispatch(clearTepmCardIds());
       });
-    // navigate("/history");
+    navigate("/payment");
   };
   useEffect(() => {
     fetch("http://localhost:8080/products/items")

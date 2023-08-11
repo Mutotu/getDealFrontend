@@ -2,6 +2,9 @@ import ProductsList from "components/ProductsList";
 import React, { useEffect, useState } from "react";
 import ProductsHome from "../components/ProductsHome";
 import { useNavigate } from "react-router-dom";
+import { selectData } from "../store/user/userSlice";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 interface Product {
   id: number;
@@ -14,6 +17,9 @@ interface Product {
 
 const Home = () => {
   const [products, setProducts] = useState<Product[]>([]);
+  const dispatch = useDispatch();
+  const selectedData = useSelector(selectData);
+  const { email } = selectedData;
   useEffect(() => {
     fetch("http://localhost:8080/products/items")
       .then((res) => res.json())
@@ -23,11 +29,15 @@ const Home = () => {
   const navigation = useNavigate();
   return (
     <div>
-      <div>Navigation</div>
-      <div onClick={() => navigation("/products")}>
-        <ProductsHome products={products} />
-      </div>
-      {/* <ProductsList products={products} /> */}
+      {!email ? (
+        <div onClick={() => navigation("/login")}>
+          <ProductsHome products={products} />{" "}
+        </div>
+      ) : (
+        <div onClick={() => navigation("/products")}>
+          <ProductsHome products={products} />
+        </div>
+      )}
     </div>
   );
 };

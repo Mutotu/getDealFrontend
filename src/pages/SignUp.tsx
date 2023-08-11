@@ -1,6 +1,7 @@
 import React, { ChangeEvent, useState } from "react";
 import styled from "styled-components";
 import Input from "../components/Input";
+import { useNavigate } from "react-router-dom";
 
 const StyledForm = styled.form``;
 
@@ -17,7 +18,7 @@ const DefaultValues = {
 };
 const SignUp: React.FC = () => {
   const [userInfo, setUserInfo] = useState(DefaultValues);
-
+  const navigate = useNavigate();
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setUserInfo((pre) => ({ ...pre, [event.target.name]: event.target.value }));
   };
@@ -91,6 +92,7 @@ const SignUp: React.FC = () => {
         ""
       )}
       <button type='submit'>Submit</button>
+      <button onClick={() => navigate("/login")}>Login</button>
     </StyledForm>
   );
 };

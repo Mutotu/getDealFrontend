@@ -39,11 +39,19 @@ export const userSlice = createSlice({
     updateTepmCardIds: (state, action) => {
       state.tempCartIds = action.payload;
     },
+    clearTepmCardIds: (state) => {
+      state.tempCartIds = [];
+    },
   },
 });
 
-export const { updateState, refreshState, updateTepmCardIds, updateCart } =
-  userSlice.actions;
+export const {
+  updateState,
+  refreshState,
+  updateTepmCardIds,
+  updateCart,
+  clearTepmCardIds,
+} = userSlice.actions;
 export const selectData = (state: { userInput: typeof initialState }) =>
   state.userInput;
 export default userSlice.reducer;

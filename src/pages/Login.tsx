@@ -71,7 +71,10 @@ const MyForm: React.FC = () => {
       {userInfo.error && (
         <ErrorMessage>Please fill in all fields.</ErrorMessage>
       )}
-      <button type='submit'>Submit</button>
+      <div>
+        <button type='submit'>Submit</button>
+        <button onClick={() => navigate("/signup")}>Sigin</button>
+      </div>
     </StyledForm>
   );
 };

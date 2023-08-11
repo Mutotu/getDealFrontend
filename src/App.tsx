@@ -8,6 +8,7 @@ import Products from "./pages/Products";
 import Header from "pages/Header";
 import Profile from "pages/Profile";
 import Basket from "pages/Basket";
+import Payment from "./pages/Payment";
 
 function App() {
   return (
@@ -20,7 +21,7 @@ function App() {
         <Route path='/products' element={<Products />} />
         <Route path='/profile' element={<Profile />} />
         <Route path='/basket' element={<Basket />} />
-        {/* <Route path='/payment' element={<Payment />} /> */}
+        <Route path='/payment' element={<Payment />} />
         <Route
           path='/*'
           element={<Navigate to='/' replace={true} />} // Redirect to login page if not logged in
