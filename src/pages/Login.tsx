@@ -73,7 +73,7 @@ const MyForm: React.FC = () => {
       )}
       <div>
         <button type='submit'>Submit</button>
-        <button onClick={() => navigate("/signup")}>Sigin</button>
+        <button onClick={() => navigate("/signup")}>Don't have an account</button>
       </div>
     </StyledForm>
   );

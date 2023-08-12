@@ -89,10 +89,10 @@ const SignUp: React.FC = () => {
       {userInfo.error ? (
         <ErrorMessage>Please fill in all fields.</ErrorMessage>
       ) : (
-        ""
-      )}
+          ""
+        )}
       <button type='submit'>Submit</button>
-      <button onClick={() => navigate("/login")}>Login</button>
+      <button onClick={() => navigate("/login")}>Have an account</button>
     </StyledForm>
   );
 };
