@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { updateState } from "../store/user/userSlice";
 import styled from "styled-components";
 import Input from "../components/Input";
+import Button from "components/Button";
 
 const StyledForm = styled.form``;
 
@@ -70,10 +71,7 @@ const MyForm: React.FC = () => {
       {userInfo.error && (
         <ErrorMessage>Please fill in all fields.</ErrorMessage>
       )}
-      <div>
-        <button type='submit'>Submit</button>
-        <button onClick={() => navigate("/signup")}>Don't have an account</button>
-      </div>
+      <Button buttonName1={"Submit"} type={"submit"} buttonName2={"Don't have an account"} onClick={() => navigate("/signup")} />
     </StyledForm>
   );
 };

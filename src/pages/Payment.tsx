@@ -1,7 +1,5 @@
-import React, { useState } from "react";
-
 const Payment = () => {
-  const handleImageClick = () => {};
+  const handleImageClick = () => { };
 
   return (
     <div>

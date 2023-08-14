@@ -2,27 +2,17 @@ import ProductsList from "../components/ProductsList";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { updateTepmCardIds } from "../store/user/userSlice";
-
-interface Product {
-  id: number;
-  productName: string;
-  image: string;
-  price: string;
-  discount: string;
-  category: string;
-}
+import { updateTempCardByOneId } from "../store/user/userSlice";
+import { Product } from "../interfaces"
 
 const Products: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
-  const [cartIds, setCartIds] = useState<number[]>([]);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleAddProduct = (id: number) => {
-    setCartIds((pre) => [...pre, id]);
+    dispatch(updateTempCardByOneId(id))
   };
   const handleClick = () => {
-    dispatch(updateTepmCardIds(cartIds));
     navigate("/basket");
   };
   useEffect(() => {
@@ -32,9 +22,12 @@ const Products: React.FC = () => {
   }, []);
 
   return (
-    <div>
+    <div className="products-container">
+      <h1>Products</h1>
       <ProductsList products={products} onHandleAdd={handleAddProduct} />
-      <button onClick={handleClick}>Go to Basket</button>
+      <button className="basket-button" onClick={handleClick}>
+        Go to Basket
+      </button>
     </div>
   );
 };

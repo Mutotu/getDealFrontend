@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 interface UserState {
-  id: number;
+  id: null;
   name: string;
   email: string;
   photo: string;
@@ -10,7 +10,7 @@ interface UserState {
   tempCartIds: any[];
 }
 
-const initialState = {
+const initialState: UserState = {
   id: null,
   name: "",
   email: "",
@@ -36,6 +36,9 @@ export const userSlice = createSlice({
       state.cart = action.payload;
     },
     refreshState: () => initialState,
+    updateTempCardByOneId: (state, action) => {
+      state.tempCartIds.push(action.payload)
+    },
     updateTepmCardIds: (state, action) => {
       state.tempCartIds = action.payload;
     },
@@ -50,7 +53,7 @@ export const {
   refreshState,
   updateTepmCardIds,
   updateCart,
-  clearTepmCardIds,
+  clearTepmCardIds, updateTempCardByOneId
 } = userSlice.actions;
 export const selectData = (state: { userInput: typeof initialState }) =>
   state.userInput;

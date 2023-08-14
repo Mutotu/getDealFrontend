@@ -8,7 +8,7 @@ import { useDispatch } from "react-redux";
 
 interface Product {
   id: number;
-  productName: string;
+  name: string;
   image: string;
   price: string;
   discount: string;
@@ -34,10 +34,10 @@ const Home = () => {
           <ProductsHome products={products} />{" "}
         </div>
       ) : (
-        <div onClick={() => navigation("/products")}>
-          <ProductsHome products={products} />
-        </div>
-      )}
+          <div onClick={() => navigation("/products")}>
+            <ProductsHome products={products} />
+          </div>
+        )}
     </div>
   );
 };

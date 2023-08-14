@@ -1,15 +1,6 @@
 import React from "react";
 import ProductCart from "./ProductCart";
-
-interface Product {
-  id: number;
-  productName: string;
-  image: string;
-  price: string;
-  discount: string;
-  category: string;
-}
-
+import { Product } from "../interfaces"
 interface ProductsListProps {
   products: Product[];
 }

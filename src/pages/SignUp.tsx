@@ -2,6 +2,7 @@ import React, { ChangeEvent, useState } from "react";
 import styled from "styled-components";
 import Input from "../components/Input";
 import { useNavigate } from "react-router-dom";
+import Button from "components/Button";
 
 
 const ErrorMessage = styled.div`
@@ -90,8 +91,7 @@ const SignUp: React.FC = () => {
       ) : (
           ""
         )}
-      <button type='submit'>Submit</button>
-      <button onClick={() => navigate("/login")}>Have an account</button>
+      <Button buttonName1={"Submit"} type={"submit"} buttonName2={"Have an account"} onClick={() => navigate("/login")} />
     </form>
   );
 };

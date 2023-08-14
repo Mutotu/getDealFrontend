@@ -18,13 +18,29 @@ const Header = () => {
     <div className='header-container'>
       <ul>
         <li onClick={() => navigation("/")}>Home</li>
-        {id && <li className='profile' onClick={() => navigation("/profile")}>
-          Profile
-        </li>}
-        <li onClick={() => navigation("/basket")}>Basket {tempCartIds.length > 0 ? tempCartIds.length : " "}</li>
-        {id && <li onClick={logout}>Log out</li>}
+        {id && (
+          <li className='profile' onClick={() => navigation("/profile")}>
+            Profile
+          </li>
+        )}
+        <li className='basket-link' onClick={() => !id ? navigation("/login") : navigation("/basket")}>
+          <span className='basket-icon'>
+            <i className='fas fa-shopping-cart'></i>
+          </span>
+      Basket{tempCartIds.length > 0 ? <span className='item-count'>{tempCartIds.length}</span> : ""}
+        </li>
+        {id ? (
+          <li className='logout-link' onClick={logout}>
+            Log out
+          </li>
+        ) : <div style={{ display: "flex" }}> <li className='logout-link' onClick={() => navigation("/login")}>
+          Log in
+      </li>  <li className='logout-link' onClick={() => navigation("/signup")}>
+              Signup
+      </li></div>}
       </ul>
     </div>
+
   );
 };
 

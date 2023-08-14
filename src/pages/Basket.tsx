@@ -2,17 +2,9 @@ import { selectData } from "../store/user/userSlice";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { updateCart, clearTepmCardIds } from "../store/user/userSlice";
+import { updateCart, clearTepmCardIds, updateTepmCardIds } from "../store/user/userSlice";
 import { useEffect, useState } from "react";
-
-interface Product {
-  id: number;
-  name: string;
-  image: string;
-  price: string;
-  discount: string;
-  category: string;
-}
+import { Product } from "../interfaces"
 
 const Basket = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -25,8 +17,8 @@ const Basket = () => {
     const body = {
       userId: id,
       quantity: 1,
-      extraDetail: "LOL1321321654",
-      productId: 43
+      extraDetail: "Extra stuff",
+      productId: tempCartIds[0]
     };
     const requestOptions: any = {
       method: "POST",
@@ -37,16 +29,22 @@ const Basket = () => {
       body: JSON.stringify(body)
     };
     requestOptions.headers.authorization = "Bearer " + token
-    // requestOptions.body = JSON.stringify(body);
     fetch("http://localhost:8080/products/carts", requestOptions).then((res) => res.json())
       .then((r) => {
-        console.log(r)
         dispatch(updateCart(r));
         dispatch(clearTepmCardIds());
       });
 
     navigate("/payment");
   };
+  const handleRemove = () => {
+    dispatch(clearTepmCardIds());
+  }
+  const handleSingleRemove = (id: number) => {
+    const remaingingItems = tempCartIds.filter(p => p !== id)
+    dispatch(updateTepmCardIds(remaingingItems));
+
+  }
   useEffect(() => {
     fetch("http://localhost:8080/products/items")
       .then((res) => res.json())
@@ -58,52 +56,57 @@ const Basket = () => {
         });
         setProducts(filteredProducts);
       });
-  }, []);
+  }, [tempCartIds]);
 
   return (
-    <div>
+    <div className="basket-content">
       {products.length > 0 ? (
         products.map((product) => (
-          <div key={product.id}>
-            <img src={product.image} alt='Product' />
-            <p>Product: {product.name}</p>
-            <p>Discount: %{product.discount}</p>
-            <p>Price: ${product.price}</p>
-            <p>Category: {product.category}</p>
+          <div key={product.id} className="basket-item">
+            <img className="product-image" src={"https://cdn3.vectorstock.com/i/1000x1000/48/52/empty-basket-icon-vector-6924852.jpg"} alt="Product" />
+            <p className="product-name">Product: {product.name}</p>
+            <p className="product-discount">Discount: %{product.discount}</p>
+            <p className="product-price">Price: ${product.price}</p>
+            <p className="product-category">Category: {product.category}</p>
+            <button onClick={() => handleSingleRemove(product.id)}>X</button>
           </div>
         ))
       ) : (
-          <div>
+          <div className="empty-basket">
             <h4>Empty Basket</h4>
             <img
-              style={{ width: "200px" }}
-              src={
-                "https://cdn3.vectorstock.com/i/1000x1000/48/52/empty-basket-icon-vector-6924852.jpg"
-              }
-              alt='Empty bin'
+              className="empty-basket-image"
+              src="https://cdn3.vectorstock.com/i/1000x1000/48/52/empty-basket-icon-vector-6924852.jpg"
+              alt="Empty bin"
             />
           </div>
         )}
       {products.length > 0 && (
-        <div>
-          <p>
+        <div className="basket-summary">
+          <p className="total-saving">
             Total Saving: $
-            {products.reduce((acc, curVal) => {
+          {products.reduce((acc, curVal) => {
             acc += Number(curVal.discount);
             return acc;
           }, 0)}
           </p>
-          <p>
+          <p className="total">
             Total: $
-            {products.reduce((acc, curVal) => {
+          {products.reduce((acc, curVal) => {
             acc += Number(curVal.price);
             return acc;
           }, 0)}
           </p>
-          <button onClick={handleClick}>Continue to Buy</button>
+          <button className="buy-button" onClick={() => handleClick()}>
+            Continue to Buy
+        </button>
+          <button className="remove-button" onClick={handleRemove}>
+            Remove Items
+        </button>
         </div>
       )}
     </div>
+
   );
 };
 

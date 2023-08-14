@@ -1,14 +1,7 @@
 import React, { useState } from "react";
 import ProductCart from "../components/ProductCart";
+import { Product } from "../interfaces"
 
-interface Product {
-  id: number;
-  productName: string;
-  image: string;
-  price: string;
-  discount: string;
-  category: string;
-}
 interface ProductsListProps {
   products: Product[];
   onHandleAdd: (id: number) => void;
@@ -21,6 +14,7 @@ const ProductsList: React.FC<ProductsListProps> = ({
 
   const handlePass = () => {
     setActiveCard((prevActiveCard) => (prevActiveCard + 1) % products.length);
+    console.log(products)
   };
 
   const handleAdd = (id: number) => {
@@ -33,19 +27,19 @@ const ProductsList: React.FC<ProductsListProps> = ({
       {products.map((p, index) => (
         <div
           key={p.id}
-          className={`product-card ${
-            index === activeCard
-              ? ""
-              : index < activeCard
+          className={`product-card ${index === activeCard
+            ? ""
+            : index < activeCard
               ? "swipe-left"
               : "swipe-right"
-          }`}
+            }`}
         >
           <ProductCart product={p} />
-          <div>
-            <button onClick={handlePass}>Pass</button>
-            <button onClick={() => handleAdd(p.id)}>Add</button>
+          <div className="card-buttons">
+            <button className="pass-button" onClick={handlePass}>Pass</button>
+            <button className="add-button" onClick={() => handleAdd(p.id)}>Add</button>
           </div>
+
         </div>
       ))}
     </div>

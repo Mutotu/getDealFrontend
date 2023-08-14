@@ -3,30 +3,7 @@ import { useSelector } from "react-redux";
 import { useState, useEffect } from 'react'
 import HistoryCard from "../components/HistoryCard"
 import { generateTimestamp } from "helperFuncs";
-
-interface IProductArr {
-  cartId: number;
-  photoLink: string;
-  name: string;
-  price: string;
-  quantity: number;
-}
-
-interface ICart {
-  cartId: number;
-  createdAt: string;
-  extraDetail: string;
-  id: number;
-  product: IProductArr;
-  productId: number;
-  quantity: number;
-}
-
-interface IHistoryCardProps {
-  savedAt: string;
-  id: number;
-  cartItems: ICart[];
-}
+import { IHistoryCardProps } from "../interfaces"
 
 
 const Profile = () => {
@@ -64,7 +41,7 @@ const Profile = () => {
         alt='Profile'
       />
       <h3>Purchase History</h3>
-      {!cart && "No Purchase made"}
+      {!token && "No Purchase made"}
       <div>
         {carts.map((cart) => (
           <HistoryCard
