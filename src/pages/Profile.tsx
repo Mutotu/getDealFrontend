@@ -1,13 +1,54 @@
 import { selectData } from "../store/user/userSlice";
 import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from 'react'
+import HistoryCard from "../components/HistoryCard"
+import { generateTimestamp } from "helperFuncs";
+
+interface IProductArr {
+  cartId: number;
+  photoLink: string;
+  name: string;
+  price: string;
+  quantity: number;
+}
+
+interface ICart {
+  cartId: number;
+  createdAt: string;
+  extraDetail: string;
+  id: number;
+  product: IProductArr;
+  productId: number;
+  quantity: number;
+}
+
+interface IHistoryCardProps {
+  savedAt: string;
+  id: number;
+  cartItems: ICart[];
+}
+
 
 const Profile = () => {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const [carts, setCarts] = useState<IHistoryCardProps[]>([]);
   const selectedData = useSelector(selectData);
-  const { name, photo, cart } = selectedData;
+  const { name, photo, token, tempCartIds, cart } = selectedData;
+
+  const requestOptions: any = {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "authorization": ""
+    },
+  };
+  useEffect(() => {
+    requestOptions.headers.authorization = "Bearer " + token
+    fetch("http://localhost:8080/me", requestOptions).then((res) => res.json())
+      .then((response) => {
+        setCarts(response.carts)
+      });
+
+  }, [tempCartIds.length])
   return (
     <div>
       <div className='profile-details'>
@@ -23,6 +64,18 @@ const Profile = () => {
         alt='Profile'
       />
       <h3>Purchase History</h3>
+      {!cart && "No Purchase made"}
+      <div>
+        {carts.map((cart) => (
+          <HistoryCard
+            key={cart.id}
+            id={cart.id}
+            savedAt={generateTimestamp(cart.savedAt)}
+            cartItems={cart.cartItems}
+          />
+        ))}
+
+      </div>
     </div>
   );
 };

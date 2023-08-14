@@ -8,7 +8,7 @@ const Header = () => {
   const navigation = useNavigate();
   const dispatch = useDispatch();
   const selectedData = useSelector(selectData);
-  const { tempCartIds } = selectedData;
+  const { tempCartIds, id } = selectedData;
 
   const logout = () => {
     dispatch(refreshState())
@@ -18,11 +18,11 @@ const Header = () => {
     <div className='header-container'>
       <ul>
         <li onClick={() => navigation("/")}>Home</li>
-        <li className='profile' onClick={() => navigation("/profile")}>
+        {id && <li className='profile' onClick={() => navigation("/profile")}>
           Profile
-        </li>
+        </li>}
         <li onClick={() => navigation("/basket")}>Basket {tempCartIds.length > 0 ? tempCartIds.length : " "}</li>
-        <li onClick={logout}>Log out</li>
+        {id && <li onClick={logout}>Log out</li>}
       </ul>
     </div>
   );

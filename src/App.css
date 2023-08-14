@@ -84,15 +84,10 @@
   perspective: 1000px;
 }
 
-.header-container {
-  background-color: #f8f8f8;
-  padding: 10px 0;
-}
-
 .header-container ul {
   list-style: none;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start; /* Change to "flex-start" to avoid squashing */
   align-items: center;
   margin: 0;
   padding: 20px;
@@ -103,16 +98,23 @@
   font-size: 20px;
   color: #333;
   font-weight: bolder;
+  margin-right: 20px; 
 }
 
-.header-container li:hover {
-  color: #007bff;
+@media (max-width: 768px) {
+  .header-container li {
+    font-size: 16px; 
+  }
+  
+  .profile-container {
+    flex-direction: column; 
+    align-items: flex-start;
+  }
+  
+  .profile {
+    margin: 10px 0; 
+  }
 }
-
-.profile {
-  margin-left: 85rem;
-}
-
 .profile-photo {
   margin-top: 30px;
   width: 100px;
