@@ -40,7 +40,6 @@ const MyForm: React.FC = () => {
         if (!r.error) {
           dispatch(updateState(r));
           setUserInfo(DefaultValues);
-          console.log(r);
           navigate("/");
         }
       })

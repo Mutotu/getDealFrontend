@@ -3,7 +3,6 @@ import styled from "styled-components";
 import Input from "../components/Input";
 import { useNavigate } from "react-router-dom";
 
-const StyledForm = styled.form``;
 
 const ErrorMessage = styled.div`
   color: red;
@@ -49,7 +48,7 @@ const SignUp: React.FC = () => {
   };
 
   return (
-    <StyledForm onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit}>
       <Input
         label='Name'
         type='text'
@@ -93,7 +92,7 @@ const SignUp: React.FC = () => {
         )}
       <button type='submit'>Submit</button>
       <button onClick={() => navigate("/login")}>Have an account</button>
-    </StyledForm>
+    </form>
   );
 };
 

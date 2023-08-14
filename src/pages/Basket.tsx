@@ -19,29 +19,32 @@ const Basket = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const selectedData = useSelector(selectData);
-  const { tempCartIds } = selectedData;
-  const requestOptions: any = {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  };
+  const { id, tempCartIds, token } = selectedData;
+
   const handleClick = () => {
     const body = {
+      userId: id,
       quantity: 1,
-      extraDetail: "N/A",
-      cartItemId: 3,
-      productId: 44,
-      product: { id: 2 },
+      extraDetail: "LOL1321321654",
+      productId: 43
     };
-    requestOptions.body = JSON.stringify(body);
-    fetch("http://localhost:8080/products", requestOptions)
-      .then((res) => res.json())
+    const requestOptions: any = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "authorization": ""
+      },
+      body: JSON.stringify(body)
+    };
+    requestOptions.headers.authorization = "Bearer " + token
+    // requestOptions.body = JSON.stringify(body);
+    fetch("http://localhost:8080/products/carts", requestOptions).then((res) => res.json())
       .then((r) => {
-        console.log(r);
+        console.log(r)
         dispatch(updateCart(r));
         dispatch(clearTepmCardIds());
       });
+
     navigate("/payment");
   };
   useEffect(() => {
@@ -70,32 +73,32 @@ const Basket = () => {
           </div>
         ))
       ) : (
-        <div>
-          <h4>Empty Basket</h4>
-          <img
-            style={{ width: "200px" }}
-            src={
-              "https://cdn3.vectorstock.com/i/1000x1000/48/52/empty-basket-icon-vector-6924852.jpg"
-            }
-            alt='Empty bin'
-          />
-        </div>
-      )}
+          <div>
+            <h4>Empty Basket</h4>
+            <img
+              style={{ width: "200px" }}
+              src={
+                "https://cdn3.vectorstock.com/i/1000x1000/48/52/empty-basket-icon-vector-6924852.jpg"
+              }
+              alt='Empty bin'
+            />
+          </div>
+        )}
       {products.length > 0 && (
         <div>
           <p>
             Total Saving: $
             {products.reduce((acc, curVal) => {
-              acc += Number(curVal.discount);
-              return acc;
-            }, 0)}
+            acc += Number(curVal.discount);
+            return acc;
+          }, 0)}
           </p>
           <p>
             Total: $
             {products.reduce((acc, curVal) => {
-              acc += Number(curVal.price);
-              return acc;
-            }, 0)}
+            acc += Number(curVal.price);
+            return acc;
+          }, 0)}
           </p>
           <button onClick={handleClick}>Continue to Buy</button>
         </div>

@@ -21,7 +21,6 @@ const Products: React.FC = () => {
   const handleAddProduct = (id: number) => {
     setCartIds((pre) => [...pre, id]);
   };
-  console.log(cartIds);
   const handleClick = () => {
     dispatch(updateTepmCardIds(cartIds));
     navigate("/basket");
