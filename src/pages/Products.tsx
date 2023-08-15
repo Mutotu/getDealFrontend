@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { updateTempCardByOneId } from "../store/user/userSlice";
 import { Product } from "../interfaces"
 
+
 const Products: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const navigate = useNavigate();
@@ -18,7 +19,8 @@ const Products: React.FC = () => {
   useEffect(() => {
     fetch("http://localhost:8080/products/items")
       .then((res) => res.json())
-      .then((items) => setProducts(items));
+      .then((items) => setProducts(items.slice(50)));
+
   }, []);
 
   return (

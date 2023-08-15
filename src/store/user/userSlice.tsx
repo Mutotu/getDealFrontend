@@ -1,14 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-
-interface UserState {
-  id: null;
-  name: string;
-  email: string;
-  photo: string;
-  token: string;
-  cart: any[];
-  tempCartIds: any[];
-}
+import { UserState } from "../../interfaces"
 
 const initialState: UserState = {
   id: null,

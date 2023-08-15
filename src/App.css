@@ -70,6 +70,7 @@
 
 .product-card.swipe-left {
   transform: translateX(-150%) rotate(-15deg);
+
 }
 
 .product-card.swipe-right {

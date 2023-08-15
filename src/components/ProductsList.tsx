@@ -11,11 +11,10 @@ const ProductsList: React.FC<ProductsListProps> = ({
   onHandleAdd,
 }) => {
   const [activeCard, setActiveCard] = useState(0);
-
   const handlePass = () => {
     setActiveCard((prevActiveCard) => (prevActiveCard + 1) % products.length);
-    console.log(products)
   };
+
 
   const handleAdd = (id: number) => {
     setActiveCard((prevActiveCard) => (prevActiveCard + 1) % products.length);

@@ -1,6 +1,6 @@
 
 
-export function generateTimestamp(timestamp) {
+export function reformatTimestamp(timestamp) {
   const dateTime = new Date(timestamp);
   const year = dateTime.getFullYear();
   const month = String(dateTime.getMonth() + 1).padStart(2, '0');

@@ -1,6 +1,7 @@
 export interface IProductArr {
   cartId: number;
-  photoLink: string;
+  photoLink?: string;
+  image?: string
   name: string;
   price: string;
   quantity: number;
@@ -26,7 +27,8 @@ export interface IHistoryCardProps {
 export interface Product {
   id: number;
   name: string;
-  image: string;
+  image?: string;
+  photoLink?: string
   price: string;
   discount: string;
   category: string;
@@ -37,4 +39,14 @@ export interface IButton {
   buttonName2: string
   type?: "button" | "submit" | "reset";
   onClick: () => void;
+}
+
+export interface UserState {
+  id: null;
+  name: string;
+  email: string;
+  photo: string;
+  token: string;
+  cart: any[];
+  tempCartIds: any[];
 }

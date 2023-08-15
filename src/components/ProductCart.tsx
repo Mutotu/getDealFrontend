@@ -10,15 +10,12 @@ const ProductCart: React.FC<ProductCartProps> = ({ product }) => {
   const discountedPrice =
     Number(product.price) -
     (Number(product.price) * Number(product.discount.slice(1))) / 100;
-
   return (
     <div key={product.id} className='product-card'>
       <img
         className="product-image"
         style={{ width: "15rem", height: "15rem" }}
-        src={
-          "https://m.atcdn.co.uk/vms/media/%7Bresize%7D/6a2081efec9a4564a93519475a0cc40a.jpg"
-        }
+        src={product.photoLink}
         alt={product.name}
       />
       <h3 className="product-name">{product.name}</h3>
