@@ -46,6 +46,7 @@ const SignUp: React.FC = () => {
       })
       .catch((error) => console.log("error", error));
     setUserInfo((pre) => ({ ...pre, error: false }));
+    navigate("/login")
   };
 
   return (
@@ -91,7 +92,7 @@ const SignUp: React.FC = () => {
       ) : (
           ""
         )}
-      <Button buttonName1={"Submit"} type={"submit"} buttonName2={"Have an account"} onClick={() => navigate("/login")} />
+      <Button buttonName1={"Submit"} type={"submit"} buttonName2={"Have an account"} />
     </form>
   );
 };

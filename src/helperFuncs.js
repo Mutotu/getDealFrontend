@@ -11,3 +11,7 @@ export function reformatTimestamp(timestamp) {
 
   return `${year}-${month}-${day} at ${hours}:${minutes}:${seconds}`;
 }
+
+export function dicountMaker(price, discount) {
+  return Number(price) - (Number(price) * Number(discount.slice(1, 3))) / 100;
+}

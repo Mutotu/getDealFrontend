@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { updateCart, clearTepmCardIds, updateTepmCardIds } from "../store/user/userSlice";
 import { useEffect, useState } from "react";
 import { Product } from "../interfaces"
+import { time } from "console";
+import { send } from "process";
 
 
 const requestOptions: any = {
@@ -18,6 +20,7 @@ const requestOptions: any = {
 
 const Basket = () => {
   const [products, setProducts] = useState<Product[]>([]);
+  const [sendingMessage, setSendingMessage] = useState("")
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const selectedData = useSelector(selectData);
@@ -38,7 +41,8 @@ const Basket = () => {
         });
     }
     dispatch(clearTepmCardIds());
-    navigate("/payment");
+    setSendingMessage('')
+    navigate("/payment")
   };
   const handleRemove = () => {
     dispatch(clearTepmCardIds());
@@ -83,32 +87,35 @@ const Basket = () => {
               alt="Empty bin"
             />
           </div>
-        )}
-      {products.length > 0 && (
-        <div className="basket-summary">
-          <p className="total-saving">
-            Total Saving: $
+        )
+      }
+      {
+        products.length > 0 && (
+          <div className="basket-summary">
+            <p className="total-saving">
+              Total Saving: $
           {products.reduce((acc, curVal) => {
-            acc += Number(curVal.discount);
-            return acc;
-          }, 0)}
-          </p>
-          <p className="total">
-            Total: $
+              acc += Number(curVal.discount);
+              return acc;
+            }, 0)}
+            </p>
+            <p className="total">
+              Total: $
           {products.reduce((acc, curVal) => {
-            acc += Number(curVal.price);
-            return acc;
-          }, 0)}
-          </p>
-          <button className="buy-button" onClick={() => handleClick()}>
-            Continue to Buy
+              acc += Number(curVal.price);
+              return acc;
+            }, 0)}
+            </p>
+            <button className="buy-button" onClick={handleClick}>
+              Continue to Buy
         </button>
-          <button className="remove-button" onClick={handleRemove}>
-            Remove Items
+            <button className="remove-button" onClick={handleRemove}>
+              Remove Items
         </button>
-        </div>
-      )}
-    </div>
+          </div>
+        )
+      }
+    </div >
 
   );
 };

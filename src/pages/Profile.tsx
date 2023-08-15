@@ -18,9 +18,6 @@ const Profile = () => {
       "authorization": ""
     },
   };
-  fetch('https://fakestoreapi.com/products')
-    .then(res => res.json())
-    .then(json => console.log(json))
   useEffect(() => {
     requestOptions.headers.authorization = "Bearer " + token
     fetch("http://localhost:8080/me", requestOptions).then((res) => res.json())
@@ -31,7 +28,7 @@ const Profile = () => {
   return (
     <div>
       <div className='profile-details'>
-        <p className='welcome-message'>Welcome! {name}</p>
+        <p className='welcome-message'>Welcome! <span style={{ fontFamily: "sans-serif", fontWeight: "bolder", color: "blueviolet" }}>{name}</span></p>
       </div>
       <img
         className='profile-photo'

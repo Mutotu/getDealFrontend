@@ -38,7 +38,7 @@ export interface IButton {
   buttonName1: string
   buttonName2: string
   type?: "button" | "submit" | "reset";
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 export interface UserState {

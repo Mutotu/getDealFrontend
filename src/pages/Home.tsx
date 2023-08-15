@@ -15,17 +15,6 @@ interface Product {
   discount: string;
   category: string;
 }
-interface ProductItem {
-  category: string;
-  createdAt: string;
-  discount: string;
-  id: number;
-  name: string;
-  image: string;
-  price: string;
-  photoLink?: string,
-}
-
 const Home = () => {
   const [products, setProducts] = useState<Product[]>([]);
 

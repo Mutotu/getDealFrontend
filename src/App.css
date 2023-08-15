@@ -53,10 +53,9 @@
   background-color: white;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
   transition: transform 0.3s;
-  cursor: pointer;
 }
 .product-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-15px);
   box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
 }
 
@@ -85,7 +84,7 @@
   cursor: pointer;
 }
 .product-stack-noauth {
-  height: 400px;
+  height: 450px;
   margin: auto;
   perspective: 1000px;
 }
@@ -104,7 +103,7 @@
 .header-container li {
   cursor: pointer;
   font-size: 20px;
-  color: #333;
+  color: rgb(226, 12, 12);
   font-weight: bolder;
   margin-right: 20px;
   position: relative;
@@ -112,6 +111,7 @@
 
 .header-container li:hover {
   color: #007bff;
+  text-decoration: underline;
 }
 
 .basket-link {
@@ -451,4 +451,34 @@
 .buttons-log button.secondary:hover {
   background-color: #f0f0f0;
   color: #007bff;
+}
+
+.link-container {
+  position: relative;
+  display: inline-block;
+}
+
+.link {
+  text-decoration: none;
+  color: #333;
+}
+
+.popup {
+  height:8.5rem;
+  margin-top: -6rem;
+  display: none;
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 10px;
+  z-index: 1;
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.popup.visible {
+  display: block;
+  opacity: 1;
+  transform: translate(0, -10px);
+}
+.popup-span{
+  text-decoration: underline;
 }

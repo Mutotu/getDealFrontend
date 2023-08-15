@@ -1,5 +1,5 @@
 import { ICart } from "../interfaces"
-
+import { dicountMaker } from "../helperFuncs"
 interface ICartItemProps {
   cartItem: ICart;
 }
@@ -8,7 +8,7 @@ const CartItem = ({ cartItem }: ICartItemProps) => {
   return (
     <div key={cartItem.cartId} className="cart-item">
       <h3>{cartItem.product.name}</h3>
-      <h4>$: {cartItem.product.price}</h4>
+      <h4>$: {dicountMaker(cartItem.product.price, ".10")}</h4>
       <img
         className="product-image"
         src={cartItem.product.photoLink}
