@@ -4,7 +4,7 @@ import ProductsHome from "../components/ProductsHome";
 import { useNavigate } from "react-router-dom";
 import { selectData } from "../store/user/userSlice";
 import { useSelector } from "react-redux";
-
+import { BASE_URL } from "../CONSONANTS"
 
 interface Product {
   id: number;
@@ -21,7 +21,7 @@ const Home = () => {
   const selectedData = useSelector(selectData);
   const { email } = selectedData;
   useEffect(() => {
-    fetch("http://localhost:8080/products/items")
+    fetch(BASE_URL + "/products/items")
       .then((res) => res.json())
       .then((items) => {
         const newItems = items.slice(50)
@@ -37,10 +37,10 @@ const Home = () => {
           <ProductsHome products={products} />{" "}
         </div>
       ) : (
-          <div onClick={() => navigation("/products")}>
-            <ProductsHome products={products} />
-          </div>
-        )}
+        <div onClick={() => navigation("/products")}>
+          <ProductsHome products={products} />
+        </div>
+      )}
     </div>
   );
 };

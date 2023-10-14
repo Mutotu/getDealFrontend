@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { updateTempCardByOneId } from "../store/user/userSlice";
 import { Product } from "../interfaces"
-
+import { BASE_URL } from "../CONSONANTS"
 
 const Products: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -17,7 +17,7 @@ const Products: React.FC = () => {
     navigate("/basket");
   };
   useEffect(() => {
-    fetch("http://localhost:8080/products/items")
+    fetch(BASE_URL + "/products/items")
       .then((res) => res.json())
       .then((items) => setProducts(items.slice(50)));
 

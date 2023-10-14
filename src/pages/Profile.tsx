@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import HistoryCard from "../components/HistoryCard"
 import { reformatTimestamp } from "helperFuncs";
 import { IHistoryCardProps } from "../interfaces"
-
+import { BASE_URL } from "../CONSONANTS"
 
 const Profile = () => {
   const [carts, setCarts] = useState<IHistoryCardProps[]>([]);
@@ -20,7 +20,7 @@ const Profile = () => {
   };
   useEffect(() => {
     requestOptions.headers.authorization = "Bearer " + token
-    fetch("http://localhost:8080/me", requestOptions).then((res) => res.json())
+    fetch(BASE_URL + "/me", requestOptions).then((res) => res.json())
       .then((response) => {
         setCarts(response.carts)
       });

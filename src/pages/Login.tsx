@@ -5,8 +5,11 @@ import { updateState } from "../store/user/userSlice";
 import styled from "styled-components";
 import Input from "../components/Input";
 import Button from "components/Button";
+import { BASE_URL } from "../CONSONANTS"
 
-const StyledForm = styled.form``;
+const StyledForm = styled.form`
+  
+`;
 
 const ErrorMessage = styled.div`
   color: red;
@@ -35,7 +38,7 @@ const MyForm: React.FC = () => {
       body: JSON.stringify(userInfo),
     };
 
-    fetch("http://localhost:8080/login", requestOptions)
+    fetch(BASE_URL + "/login", requestOptions)
       .then((response) => response.json())
       .then((r) => {
         if (!r.error) {

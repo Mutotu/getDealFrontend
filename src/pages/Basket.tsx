@@ -5,9 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { updateCart, clearTepmCardIds, updateTepmCardIds } from "../store/user/userSlice";
 import { useEffect, useState } from "react";
 import { Product } from "../interfaces"
-import { time } from "console";
-import { send } from "process";
-
+import { BASE_URL } from "../CONSONANTS"
 
 const requestOptions: any = {
   method: "POST",
@@ -20,7 +18,6 @@ const requestOptions: any = {
 
 const Basket = () => {
   const [products, setProducts] = useState<Product[]>([]);
-  const [sendingMessage, setSendingMessage] = useState("")
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const selectedData = useSelector(selectData);
@@ -35,13 +32,12 @@ const Basket = () => {
         productId: tempCartIds[i]
       };
       requestOptions.body = JSON.stringify(body)
-      fetch("http://localhost:8080/products/carts", requestOptions).then((res) => res.json())
+      fetch(BASE_URL + "/products/carts", requestOptions).then((res) => res.json())
         .then((r) => {
           dispatch(updateCart(r));
         });
     }
     dispatch(clearTepmCardIds());
-    setSendingMessage('')
     navigate("/payment")
   };
   const handleRemove = () => {
@@ -53,7 +49,7 @@ const Basket = () => {
 
   }
   useEffect(() => {
-    fetch("http://localhost:8080/products/items")
+    fetch(BASE_URL + "/products/items")
       .then((res) => res.json())
       .then((items) => {
         const filteredProducts = items.filter((p: any) => {

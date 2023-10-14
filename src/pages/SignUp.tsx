@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Input from "../components/Input";
 import { useNavigate } from "react-router-dom";
 import Button from "components/Button";
-
+import { BASE_URL } from "../CONSONANTS"
 
 const ErrorMessage = styled.div`
   color: red;
@@ -36,7 +36,7 @@ const SignUp: React.FC = () => {
       body: JSON.stringify(userInfo),
     };
 
-    fetch("http://localhost:8080/users", requestOptions)
+    fetch(BASE_URL + "/users", requestOptions)
       .then((response) => response.json())
       .then((r) => {
         if (!r.error) {
@@ -90,9 +90,9 @@ const SignUp: React.FC = () => {
       {userInfo.error ? (
         <ErrorMessage>Please fill in all fields.</ErrorMessage>
       ) : (
-          ""
-        )}
-      <Button buttonName1={"Submit"} type={"submit"} buttonName2={"Have an account"} />
+        ""
+      )}
+      <Button buttonName1={"Submit"} type={"submit"} buttonName2={"Have an account"} onClick={() => navigate("/login")} />
     </form>
   );
 };
